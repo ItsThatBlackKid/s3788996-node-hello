@@ -1,0 +1,22 @@
+# This config is equivalent to both the '.circleci/extended/orb-free.yml' and the base '.circleci/config.yml'
+version: 2.1
+
+jobs:
+  docker-run:
+    steps:
+      - checkout
+    executor:
+    docker:
+      - image: s3788996/node-hello:node-hello
+        auth:
+          username: s3788996
+          password: $DOCKERHUB_PASSWORD
+
+
+orbs:
+  node: circleci/node@4.1
+
+workflows:
+  run:
+    jobs:
+      - docker-run
